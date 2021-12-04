@@ -7,4 +7,12 @@ public class Teacher extends Survivor{
     public Teacher(){
 
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

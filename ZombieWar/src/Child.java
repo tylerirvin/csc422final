@@ -7,4 +7,12 @@ public class Child extends Survivor{
     public Child(){
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
