@@ -47,4 +47,11 @@ public class Zombie {
     {
         return health <= 0;
     }
+    
+    
+    public void attack(Survivor survivor)
+    {
+        if (!survivor.isDead())
+            survivor.setHealth(survivor.getHealth() - this.attack);
+    }
 }

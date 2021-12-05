@@ -50,4 +50,10 @@ public class Survivor {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public void attack(Zombie zombie)
+    {
+        if (!zombie.isDead())
+            zombie.setHealth(zombie.getHealth() - this.attack);
+    }
 }
