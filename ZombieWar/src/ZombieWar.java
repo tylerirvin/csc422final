@@ -3,6 +3,15 @@
 public class ZombieWar {
 
     public static void main(String[] args) {
+        Survivor child1 = new Soldier();
+        System.out.println("Survivor class:  " + child1.getName());
+        System.out.println("Survivor attack: " + child1.getAttack());
+        System.out.println("Survivor health: " + child1.getHealth() + "\n");
+        
+        Zombie zombie1 = new Tank();
+        System.out.println("Zombie class:  " + zombie1.getName());
+        System.out.println("Zombie attack: " + zombie1.getAttack());
+        System.out.println("Zombie health: " + zombie1.getHealth() + "\n");
 
         int initialSurvivorNum = 17;
         int afterMathSurvivorNum = 6;
