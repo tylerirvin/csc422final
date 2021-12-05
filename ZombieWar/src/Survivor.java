@@ -19,6 +19,10 @@ public class Survivor {
         return health;
     }
 
+    public boolean isDead() {
+        return health <= 0;
+    }
+
     public void setAttack(int attack) {
         this.attack = attack;
     }
