@@ -51,9 +51,14 @@ public class Survivor {
         this.name = name;
     }
     
+
     public void attack(Zombie zombie)
     {
-        if (!zombie.isDead())
+        if (!zombie.isDead() && !this.isDead())
+        {
             zombie.setHealth(zombie.getHealth() - this.attack);
+            if (zombie.isDead())
+                System.out.println("  " + this.name + " killed " + zombie.getName());
+        }
     }
 }

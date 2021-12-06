@@ -1,6 +1,6 @@
 public class Tank extends Zombie{
 
-    public Tank(){
-        super (150, 20, "Tank");
+    public Tank(int counter){
+        super (150, 20, "Tank " + counter);
     }
 }

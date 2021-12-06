@@ -51,7 +51,11 @@ public class Zombie {
     
     public void attack(Survivor survivor)
     {
-        if (!survivor.isDead())
+        if (!survivor.isDead() && !this.isDead())
+        {
             survivor.setHealth(survivor.getHealth() - this.attack);
+            if(survivor.isDead())
+                System.out.println("  " + this.name + " killed " + survivor.getName());
+        }
     }
 }
