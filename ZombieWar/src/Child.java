@@ -1,6 +1,6 @@
 public class Child extends Survivor{
 
-    public Child(){
-        super(20, 2, "Child");
+    public Child(int counter){
+        super(20, 2, "Child " + counter);
     }
 }
