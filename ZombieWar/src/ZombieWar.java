@@ -16,22 +16,23 @@ public class ZombieWar {
         int zombieCount = (int)(1 + Math.random() * MAX_CHARACTERS);
         initialize(survivorCount, zombieCount);
 
-        int initialSurvivorNum = 17;
+/*        int initialSurvivorNum = 17;
         int afterMathSurvivorNum = 6;
         int zombieNum = 8;
         
         SampleRun1(initialSurvivorNum, afterMathSurvivorNum, zombieNum);
-
+*/
+        attack();
     }
 
-    private static void SampleRun1(int initialSurvivorNum, int afterMathSurvivorNum, int zombieNum) {
+/*    private static void SampleRun1(int initialSurvivorNum, int afterMathSurvivorNum, int zombieNum) {
 
         String outcome = "We have " + initialSurvivorNum + " survivors trying to make it to safety.\nBut there are "
                 + zombieNum + " zombies waiting for them.\nIt seems " + afterMathSurvivorNum
                 + " have made it to safety.";
         System.out.print(outcome);
     }
-    
+*/    
     
     /**
      * Fills ArrayLists survivors and zombies. Subclasses for each chosen randomly.
@@ -90,5 +91,51 @@ public class ZombieWar {
             System.out.println("Zombie health: " + zombies.get(i).getHealth() + "\n");            
         }
 */
-    }
+    } // end initialize()
+
+    /**
+     * Cycles through the survivor vs zombie attack waves. Survivors attack first.
+     * 
+     * Author: Sienna-Rae Johnson
+     * Revisions (work, person):
+     */
+    private static void attack() {
+        // Continue until one faction is depleted
+        while(survivors.size() > 0 && zombies.size() > 0) {
+            // survivors attack first. Every survivor attacks every zombie
+            for (int i = 0; i < survivors.size(); i++) {
+                for (int j = 0; j < zombies.size(); j++) {
+                    // One survivor attacks one zombie
+                    survivors.get(i).attack(zombies.get(j));
+
+                    // If zombie dies, remove it from list and decrement counter by one
+                    if (zombies.get(j).isDead()) {
+                        zombies.remove(j);
+                        j--;
+                    }
+                } // end for(j)
+            } // end for(i)
+
+            // zombies attack next. Every zombie attacks every survivor
+            for (int i = 0; i < zombies.size(); i++) {
+                for (int j = 0; j < survivors.size(); j++) {
+                    // One zombie attacks onen survivor
+                    zombies.get(i).attack(survivors.get(j));
+
+                    // If survivor dies, remove it from list and decrement counter by one
+                    if (survivors.get(j).isDead()) {
+                        survivors.remove(j);
+                        j--;
+                    }
+                } // end for(j)
+            } // end for(i)
+        } // end while()
+
+        // Display number of living survivors
+        if (survivors.size() < 1) 
+            System.out.println("None of the survivors made it.");
+        else 
+            System.out.println("It seems " + survivors.size() + " have made it to safety.");
+    } // end startBattle()
+
 }
