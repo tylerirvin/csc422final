@@ -41,21 +41,38 @@ public class ZombieWar {
      * @param zombieCount   - Integer for number of Zombies to create
      * 
      * Author: Tyler Irvin
-     * Revisions (work, person):
+     * Revisions (work, person)
+     * -------------------------------------------------------------------------
+     * Added stats block to avoid instanceof calls. Also reworked constructors to 
+     * allow for number to be inserted in name. Added details to intro.
+     * -Tyler Irvin
      */
     private static void initialize(int survivorCount, int zombieCount)
     {
+        int[][] stats = new int[2][];
+        stats[0] = new int[]{0, 0, 0};
+        stats[1] = new int[]{0, 0};
+        
         for (int i = 0; i < survivorCount; i++)
         {
             int randomClass = (int)(Math.random() * 3);
             switch (randomClass)
             {
                 case 0  -> 
-                    {survivors.add(new Child());}
+                {
+                    stats[0][0]++;
+                    survivors.add(new Child(stats[0][0]));
+                }
                 case 1  ->
-                    {survivors.add(new Teacher());}
+                {
+                    stats[0][1]++;
+                    survivors.add(new Teacher(stats[0][1]));
+                }
                 default ->
-                    {survivors.add(new Soldier());}
+                {
+                    stats[0][2]++;
+                    survivors.add(new Soldier(stats[0][2]));
+                }
             }
         }
         
@@ -65,20 +82,28 @@ public class ZombieWar {
             switch (randomClass)
             {
                 case 0  ->
-                    {zombies.add(new CommonInfected());}
+                {
+                    stats[1][0]++;
+                    zombies.add(new CommonInfected(stats[1][0]));
+                }
                 default ->
-                    {zombies.add(new Tank());}
+                {
+                    stats[1][1]++;
+                    zombies.add(new Tank(stats[1][1]));
+                }
             }
         }
         
-        System.out.println("We have " + survivors.size() + " survivors trying to make it to safety.");
-        System.out.println("But there are " + zombies.size() + " zombies waiting for them.");
+        System.out.print("We have " + survivors.size() + " survivors trying to make it to safety.");
+        System.out.println(" (" + stats[0][0] + " children, " + stats[0][1] + " teachers, " + stats[0][2] + " soldiers)");
+        System.out.print("But there are " + zombies.size() + " zombies waiting for them.");
+        System.out.println(" (" + stats[1][0] + " common infected, " + stats[1][1] + " tanks)");
         
 /*          // TESTING output
         System.out.println("\nSURVIVORS:\n");
         for (int i = 0; i < survivors.size(); i++)
         {
-            System.out.println("Survivor class:  " + survivors.get(i).getName());
+            System.out.println("Survivor name:   " + survivors.get(i).getName());
             System.out.println("Survivor attack: " + survivors.get(i).getAttack());
             System.out.println("Survivor health: " + survivors.get(i).getHealth() + "\n");
         }
@@ -86,12 +111,12 @@ public class ZombieWar {
         System.out.println("\nZOMBIES:\n");
         for (int i = 0; i < zombies.size(); i++)
         {
-            System.out.println("Zombie class:  " + zombies.get(i).getName());
+            System.out.println("Zombie name:   " + zombies.get(i).getName());
             System.out.println("Zombie attack: " + zombies.get(i).getAttack());
             System.out.println("Zombie health: " + zombies.get(i).getHealth() + "\n");            
         }
 */
-    } // end initialize()
+    }
 
     /**
      * Cycles through the survivor vs zombie attack waves. Survivors attack first.
