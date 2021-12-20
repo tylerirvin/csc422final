@@ -49,13 +49,16 @@ public class Zombie {
     }
     
     
-    public void attack(Survivor survivor)
+    public String attack(Survivor survivor)
     {
+        String result = "";
         if (!survivor.isDead() && !this.isDead())
         {
             survivor.setHealth(survivor.getHealth() - this.attack);
             if(survivor.isDead())
-                System.out.println("  " + this.name + " killed " + survivor.getName());
+                result = "  " + this.name + " killed " + survivor.getName() + ".";
         }
+        
+        return result;
     }
 }

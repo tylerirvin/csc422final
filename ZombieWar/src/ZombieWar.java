@@ -92,7 +92,7 @@ public class ZombieWar {
         System.out.print("We have " + survivors.size() + " survivors trying to make it to safety.");
         System.out.println(" (" + stats[0][0] + " children, " + stats[0][1] + " teachers, " + stats[0][2] + " soldiers)");
         System.out.print("But there are " + zombies.size() + " zombies waiting for them.");
-        System.out.println(" (" + stats[1][0] + " common infected, " + stats[1][1] + " tanks)");
+        System.out.println(" (" + stats[1][0] + " common infected, " + stats[1][1] + " tanks)\n");
         
 /*          // TESTING output
         System.out.println("\nSURVIVORS:\n");
@@ -100,7 +100,10 @@ public class ZombieWar {
         {
             System.out.println("Survivor name:   " + survivors.get(i).getName());
             System.out.println("Survivor attack: " + survivors.get(i).getAttack());
-            System.out.println("Survivor health: " + survivors.get(i).getHealth() + "\n");
+            System.out.println("Survivor health: " + survivors.get(i).getHealth());
+            if (survivors.get(i).getWeapon() != null)
+                System.out.println("Armed with: " + survivors.get(i).getWeapon().getName());
+            System.out.println();
         }
         
         System.out.println("\nZOMBIES:\n");
@@ -119,6 +122,11 @@ public class ZombieWar {
      * 
      * Author: Sienna-Rae Johnson
      * Revisions (work, person):
+     * -------------------------------------------------------------------------
+     * Changed the attack functions to return a String to keep all printing with
+     * the main function.
+     * - Tyler Irvin
+     * -------------------------------------------------------------------------
      */
     private static void attack() {
         // Continue until one faction is depleted
@@ -130,7 +138,7 @@ public class ZombieWar {
                 for (int j = 0; j < zombies.size(); j++) 
                 {
                     // One survivor attacks one zombie
-                    survivors.get(i).attack(zombies.get(j));                    
+                    String result = survivors.get(i).attack(zombies.get(j));                    
 
                     // If zombie dies, remove it from list and decrement counter by one
                     if (zombies.get(j).isDead()) 
@@ -138,6 +146,9 @@ public class ZombieWar {
                         zombies.remove(j);
                         j--;
                     }
+                    
+                    if (!result.isBlank())
+                        System.out.println(result);
                 } // end for(j)
             } // end for(i)
 
@@ -147,7 +158,7 @@ public class ZombieWar {
                 for (int j = 0; j < survivors.size(); j++) 
                 {
                     // One zombie attacks one survivor
-                    zombies.get(i).attack(survivors.get(j));
+                    String result = zombies.get(i).attack(survivors.get(j));
 
                     // If survivor dies, remove it from list and decrement counter by one
                     if (survivors.get(j).isDead()) 
@@ -155,6 +166,9 @@ public class ZombieWar {
                         survivors.remove(j);
                         j--;
                     }
+                    
+                    if (!result.isEmpty())
+                        System.out.println(result);
                 } // end for(j)
             } // end for(i)
         } // end while()
